@@ -2,6 +2,7 @@
 var db = require('./src/config.js');
 var search = require('./src/search.js');
 var add = require('./src/add.js');
+var del = require('./src/delete.js');
 var extend = require('extend');
 var mysql   = require('mysql');
 var co = require('co');
@@ -13,7 +14,7 @@ function SMysql(config) {
     this.connection = mysql.createConnection(db); 
     this.connection.connect();
 }
-SMysql.prototype = extend(search,add);
+SMysql.prototype = extend(search,add,del);
 SMysql.prototype.end = function(func) {
     var that = this;
 

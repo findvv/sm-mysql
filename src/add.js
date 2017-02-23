@@ -3,23 +3,22 @@ module.exports = {
     addHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
-            key = args[0];
+            obj = args[0],
+            table = that.config.table,
+            arr1 = [],
+            arr2 = [],
+            str1 = '',
+            str2 = '';
 
-        if (!key) {
-            key = '*';
-        } else if(key.length > 0) {
-            key = String(key);
+        for(var k in obj) {
+            arr1.push(k);
+            arr2.push('"' + obj[k] + '"');
         }
-        connection.query((`select ${key} from ${that.config.table}`), function(err, rows, fields) {
+        str1 = '(' + String(arr1) + ')';
+        str2 = '(' + String(arr2) + ')';
+        connection.query(`insert into ${table} ${str1} values ${str2}`, function() {
             that.startNum += 1;
-            var index = args[1] || that.startNum;
-            if (err) {
-                that.result.push(err);
-                resolve();
-            } else {
-                that.result.push(rows);
-                resolve();
-            }
+            resolve();
         });
     },
     add : function(index, key){        

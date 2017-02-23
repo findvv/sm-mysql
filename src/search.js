@@ -3,14 +3,15 @@ module.exports = {
     searchHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
-            key = args[0];
+            key = args[0],
+            table = that.config.table;
 
         if (!key) {
             key = '*';
         } else if(key.length > 0) {
             key = String(key);
         }
-        connection.query((`select ${key} from ${that.config.table}`), function(err, rows, fields) {
+        connection.query(`select ${key} from ${table}`, function(err, rows, fields) {
             that.startNum += 1;
             var index = args[1] || that.startNum;
             if (err) {
