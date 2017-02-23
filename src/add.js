@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-    searchHandler : function(args, resolve){
+    addHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
             key = args[0];
@@ -22,9 +22,9 @@ module.exports = {
             }
         });
     },
-    search : function(index, key){        
+    add : function(index, key){        
         this.steps.push({
-            name: 'searchHandler',
+            name: 'addHandler',
             args: arguments
         });
         return this;
