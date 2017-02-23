@@ -2,7 +2,6 @@ var SMysql = require('./index.js')
 var db = require('./src/config.js');
 var sMysql = new SMysql(db);
 sMysql
-    .start()
     .search(['name'])
     .search()
     .search(['password'])
