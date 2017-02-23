@@ -1,5 +1,4 @@
 'use strict';
-var db = require('./src/config.js');
 var mysql   = require('mysql');
 var co = require('co');
 function SMysql(config) {
@@ -7,8 +6,13 @@ function SMysql(config) {
     this.result = [];
     this.steps = [];
     this.startNum = 0;
-    this.connection = mysql.createConnection(db); 
+    this.connection = null;
+}
+SMysql.prototype.start = function(){
+    var config = this.config;
+    this.connection = mysql.createConnection(config); 
     this.connection.connect();
+    return this;
 }
 SMysql.prototype.searchHandler = function(args, resolve){
     var that = this,
@@ -56,13 +60,4 @@ SMysql.prototype.end = function(func) {
         that.connection.end();
     })
 }
-
-var sMysql = new SMysql(db);
-
-sMysql.search(['name'])
-      .search()
-      .search(['password'])
-      .search(['name','password'])
-      .end(function(data){
-        console.log(data[2]);
-      });
+module.exports = SMysql;
