@@ -11,7 +11,7 @@ module.exports = {
         } else if(key.length > 0) {
             key = String(key);
         }
-        connection.query(`select ${key} from ${table}`, function(err, rows, fields) {
+        connection.query(`SELECT ${key} FROM ${table}`, function(err, rows, fields) {
             that.startNum += 1;
             var index = args[1] || that.startNum;
             if (err) {
