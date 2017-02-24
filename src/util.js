@@ -5,10 +5,15 @@ var obj = {
             str = '';
 
         for(var i = 0; i < keys.length; i++) {
+            var key = keys[i],
+                value = obj[keys[i]],
+                equl = value.indexOf('%') == -1 ? '=' : ' LIKE ',
+                sum = key + equl + '"' + value + '"';
+
             if (i == 0) {
-                str += keys[i] + '=' + obj[keys[i]];
+                str += sum;
             } else {
-                str += ' AND ' + keys[i] + '=' + obj[keys[i]];
+                str += ' AND ' + sum;
             }
         }
         return str;
