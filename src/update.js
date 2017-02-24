@@ -5,7 +5,7 @@
 3. sMysql.search(['name','password']) ==> 搜索表中所有key为name和password的数据
 */
 module.exports = {
-    searchHandler : function(args, resolve){
+    updateHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
             key = args[0],
@@ -28,9 +28,9 @@ module.exports = {
             }
         });
     },
-    search : function(index, key){        
+    update : function(index, key){        
         this.steps.push({
-            name: 'searchHandler',
+            name: 'updateHandler',
             args: arguments
         });
         return this;

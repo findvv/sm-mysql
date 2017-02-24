@@ -1,4 +1,10 @@
 'use strict';
+/** @examples
+1. sMysql.add({ ==> 向表中增加key->name/value->test，key->password/value->123456的数据
+    'name': 'test',
+    'password': '123456'
+})
+*/
 module.exports = {
     addHandler : function(args, resolve){
         var that = this,

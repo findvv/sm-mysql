@@ -1,5 +1,5 @@
 'use strict';
-/** @params
+/** @examples
 1. sMysql.del() ==> 删除表中所有数据
 2. sMysql.del({ ==> 删除表中name值为test，password值为123的数据
     'name': 'test',
