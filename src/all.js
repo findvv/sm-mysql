@@ -1,6 +1,7 @@
 'use strict';
-var search = require('./src/search.js');
-var add = require('./src/add.js');
-var del = require('./src/delete.js');
+var search = require('./search.js');
+var add = require('./add.js');
+var del = require('./delete.js');
+var update = require('./update.js');
 var extend = require('extend');
-module.exports = extend(search,add,del);
+module.exports = extend(search,add,del,update);

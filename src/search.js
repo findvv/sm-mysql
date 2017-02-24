@@ -18,7 +18,6 @@ module.exports = {
         }
         connection.query(`SELECT ${key} FROM ${table}`, function(err, rows, fields) {
             that.startNum += 1;
-            var index = args[1] || that.startNum;
             if (err) {
                 that.result.push(err);
                 resolve();

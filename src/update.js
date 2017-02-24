@@ -1,24 +1,21 @@
 'use strict';
 /** @examples
-1. sMysql.search() ==> 搜索表中所有数据
-2. sMysql.search('name') ==> 搜索表中所有key为name的数据
-3. sMysql.search(['name','password']) ==> 搜索表中所有key为name和password的数据
+1. sMysql.update({'password':'121'},{'name':'1234','num':'111'})
+ ==> 更新表中满足name为1234，num为111的数据，将key为password的值设定成121
 */
+var util = require('./util.js');
 module.exports = {
     updateHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
-            key = args[0],
-            table = that.config.table;
+            changeData = args[0],
+            queryData = args[1],
+            table = that.config.table,
+            str1 = util.and(changeData),
+            str2 = util.and(queryData);
 
-        if (!key) {
-            key = '*';
-        } else if(key.length > 0) {
-            key = String(key);
-        }
-        connection.query(`SELECT ${key} FROM ${table}`, function(err, rows, fields) {
+        connection.query(`UPDATE ${table} SET ${str1} WHERE ${str2}`, function(err, rows, fields) {
             that.startNum += 1;
-            var index = args[1] || that.startNum;
             if (err) {
                 that.result.push(err);
                 resolve();
