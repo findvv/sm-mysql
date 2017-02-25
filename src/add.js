@@ -19,8 +19,9 @@ module.exports = {
         }
         str1 = '(' + String(arr1) + ')';
         str2 = '(' + String(arr2) + ')';
-        connection.query(`INSERT INTO ${table} ${str1} VALUES ${str2}`, function() {
+        connection.query(`INSERT INTO ${table} ${str1} VALUES ${str2}`, function(err, rows, fields) {
             that.startNum += 1;
+            err ? that.result.push(err) : that.result.push(rows);
             resolve();
         });
     },

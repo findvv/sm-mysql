@@ -41,13 +41,8 @@ module.exports = {
         }
         connection.query(`SELECT ${query} FROM ${table}${condition}${orderBy}`, function(err, rows, fields) {
             that.startNum += 1;
-            if (err) {
-                that.result.push(err);
-                resolve();
-            } else {
-                that.result.push(rows);
-                resolve();
-            }
+            err ? that.result.push(err) : that.result.push(rows);
+            resolve();
         });
     },
     search : function(index, key){        
