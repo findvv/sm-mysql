@@ -12,7 +12,7 @@ module.exports = {
             queryData = args[1],
             table = that.config.table,
             str1 = util.and(changeData),
-            str2 = util.and(queryData);
+            str2 = util.where(queryData);
 
         connection.query(`UPDATE ${table} SET ${str1} WHERE ${str2}`, function(err, rows, fields) {
             that.startNum += 1;

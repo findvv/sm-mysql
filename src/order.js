@@ -12,7 +12,7 @@ module.exports = {
             connection = that.connection,
             key = String(args[0]),
             table = that.config.table,
-            query = args[1] ? (' WHERE ' + util.and(args[1])) : '';
+            query = args[1] ? (' WHERE ' + util.where(args[1])) : '';
 
         connection.query(`SELECT ${key} FROM ${table}${query}`, function(err, rows, fields) {
             that.startNum += 1;

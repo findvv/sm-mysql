@@ -32,7 +32,7 @@ module.exports = {
                 query = String(obj.query);
             }
             if (isStringOrArray(obj.condition)) {
-                condition = ` WHERE ${util.and(obj.condition)}`;
+                condition = ` WHERE ${util.where(obj.condition)}`;
             }
             if (isStringOrArray(obj.orderBy)) {
                 sort = (obj.sort == 'ASC' || obj.sort == 'DESC') ? obj.sort : 'ASC';

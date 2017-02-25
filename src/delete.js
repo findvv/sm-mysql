@@ -19,7 +19,7 @@ module.exports = {
         if (!obj) {
             newStr = `DELETE FROM ${table}`;
         } else {
-            str = util.and(obj);
+            str = util.where(obj);
             newStr = `DELETE FROM ${table} WHERE ${str}`;
         }        
         connection.query(newStr, function(){
