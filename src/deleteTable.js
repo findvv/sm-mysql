@@ -1,6 +1,6 @@
 'use strict';
 /** @examples
-1. sMysql.delTable('') ==> 删除数据表
+1. sMysql.deleteTable('') ==> 删除数据表
 */
 module.exports = {
     delTableHandler : function(args, resolve){
@@ -13,7 +13,7 @@ module.exports = {
             resolve();
         });
     },
-    delTable : function(index, key){        
+    deleteTable : function(index, key){        
         this.steps.push({
             name: 'delTableHandler',
             args: arguments
