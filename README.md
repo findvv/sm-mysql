@@ -1,5 +1,4 @@
-sm-mysql
-==============
+操作数据库的简单接口
 
 [sm-mysql](https://github.com/findvv/sm-mysql).
 
