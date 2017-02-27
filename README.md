@@ -1,7 +1,7 @@
-SMysqlJS
+sm-mysql
 ==============
 
-[sm-mysqlJS](https://github.com/findvv/sm-mysql).
+[sm-mysql](https://github.com/findvv/sm-mysql).
 
 操作数据库的简单接口，支持链式操作，返回结果列表
 
