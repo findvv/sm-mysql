@@ -2,9 +2,20 @@ var SMysql = require('./index.js')
 var db = require('./src/config.js');
 var sMysql = new SMysql(db);
 sMysql
-    .add({'nu': 1,'name': 'zzx','address': 'beijing'})
-    .search()
-    .search()
+    .createTable('test7',{
+        'uid' : {
+            type: 'INT',
+            length: 10,
+            isNull: false,
+            default: '1'
+        },
+        'name' : {
+            type: 'VARCHAR',
+            length: 10,
+            isNull: true,
+            default: 'zzx'
+        }
+    })
     .end(function(data){
         console.log(data[0]);
     });
