@@ -1,6 +1,19 @@
 'use strict';
 /** @examples
-1. sMysql.createTable('add');
+1.  sMysql.createTable('test7',{
+        'uid' : {
+            type: 'INT',
+            length: 10,
+            isNull: false,
+            default: '1'
+        },
+        'name' : {
+            type: 'VARCHAR',
+            length: 10,
+            isNull: true,
+            default: 'zzx'
+        }
+    });
 */
 module.exports = {
     createTableHandler : function(args, resolve){
