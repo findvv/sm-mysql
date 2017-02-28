@@ -2,7 +2,8 @@
 /** 
 复制表
 @examples
-1.  sMysql.copyTable('test7');
+1.  sMysql.copyTable('movie','movie2');
+将movie拷贝一份为movie2，两个表在同一个数据库中
 */
 var co = require('co');
 module.exports = {
