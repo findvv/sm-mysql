@@ -8,8 +8,9 @@ module.exports = {
             connection = that.connection,
             table = args[0] || that.config.table;
 
-        connection.query(`DROP TABLE ${table}`, function(){
+        connection.query(`DROP TABLE ${table}`, function(err, rows, fields){
             that.startNum += 1;
+            err ? that.result.push(err.code) : that.result.push(rows);
             resolve();
         });
     },

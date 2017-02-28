@@ -11,7 +11,7 @@ module.exports = {
 
         connection.query(`DROP DATABASE ${sql}`, function(err, rows, fields) {
             that.startNum += 1;
-            err ? that.result.push(err) : that.result.push(rows);
+            err ? that.result.push(err.code) : that.result.push(rows);
             resolve();
         });
     },

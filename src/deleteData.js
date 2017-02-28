@@ -22,8 +22,9 @@ module.exports = {
             str = util.where(obj);
             newStr = `DELETE FROM ${table} WHERE ${str}`;
         }        
-        connection.query(newStr, function(){
+        connection.query(newStr, function(err, rows, fields){
             that.startNum += 1;
+            err ? that.result.push(err.code) : that.result.push(rows);
             resolve();
         });
     },

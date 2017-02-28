@@ -2,7 +2,7 @@ var SMysql = require('./index.js')
 var db = require('./src/config.js');
 var sMysql = new SMysql(db);
 sMysql
-    .deleteSql('test8')
+    .deleteSql('test')
     .end(function(data){
         console.log(data[0]);
     });
