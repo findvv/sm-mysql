@@ -1,7 +1,7 @@
 'use strict';
 /** @examples
-1. sMysql.deleteData() ==> 删除表中所有数据
-2. sMysql.deleteData({ ==> 删除表中name值为test，password值为123的数据
+1. sMysql.deleteData('table') ==> 删除table表中所有数据
+2. sMysql.deleteData('table', { ==> 删除表中name值为test，password值为123的数据
     'name': 'test',
     'password': '123'
 })
@@ -11,8 +11,8 @@ module.exports = {
     deleteDataHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
-            obj = args[0], 
-            table = that.config.table,
+            obj = args[1], 
+            table = args[0],
             str = '',
             newStr = '';
 

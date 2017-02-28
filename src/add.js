@@ -1,13 +1,13 @@
 'use strict';
 /** @examples
-1. sMysql.add({'name': 'test','password': '123456'}) ==> 向表中增加key->name/value->test，key->password/value->123456的数据
+1. sMysql.add('table',{'name': 'test','password': '123456'}) ==> 向table表中增加key->name/value->test，key->password/value->123456的数据
 */
 module.exports = {
     addHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
-            obj = args[0],
-            table = that.config.table,
+            obj = args[1],
+            table = args[0],
             arr1 = [],
             arr2 = [],
             str1 = '',

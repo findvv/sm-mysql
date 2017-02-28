@@ -7,7 +7,7 @@ module.exports = {
     delTableHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
-            table = String(Array.from(args)) || that.config.table;
+            table = String(Array.from(args));
 
         connection.query(`DROP TABLE ${table}`, function(err, rows, fields){
             that.startNum += 1;

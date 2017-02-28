@@ -1,8 +1,8 @@
 'use strict';
 /** @examples
-1. sMysql.search('*') ==> 搜索表中所有数据
-2. sMysql.search('name') ==> 搜索表中所有key为name的数据
-3. sMysql.search({
+1. sMysql.search('table','*') ==> 搜索table表中所有数据
+2. sMysql.search('table','name') ==> 搜索table表中所有key为name的数据
+3. sMysql.search('table',{
         query: '*',                     // 搜索关键词
         condition: {'name':'1'},        // 搜索条件
         orderBy:['name','password'],    // 排序条件
@@ -21,8 +21,8 @@ module.exports = {
     searchHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
-            obj = args[0],
-            table = that.config.table,
+            table = args[0],
+            obj = args[1],
             query = '*', condition = '',orderBy = '',sort = '',str = '';
 
         if (isStringOrArray(obj)) {

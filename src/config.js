@@ -4,6 +4,5 @@ module.exports = {
   user     : 'cdb_outerroot',  
   password : '',  
   database : 'db',
-  port     : '3724',
-  table    : 'movie'
+  port     : '3724'
 }
