@@ -14,7 +14,7 @@ function isObject(obj) {
     return Object.prototype.toString.call(obj) == '[object Object]';
 }
 function isStringOrArray(obj) {
-    return typeof obj == 'string' || Object.prototype.toString.call(obj) == '[object Array]';
+    return obj && (typeof obj == 'string' || Object.prototype.toString.call(obj) == '[object Array]');
 }
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
             connection = that.connection,
             obj = args[0],
             table = that.config.table,
-            query = '*', condition = '',orderBy = '',sort = '';
+            query = '*', condition = '',orderBy = '',sort = '',str = '';
 
         if (isStringOrArray(obj)) {
             query = String(obj);
@@ -36,10 +36,11 @@ module.exports = {
             }
             if (isStringOrArray(obj.orderBy)) {
                 sort = (obj.sort == 'ASC' || obj.sort == 'DESC') ? obj.sort : 'ASC';
-                orderBy = ` ORDER BY ${String(obj.orderBy)} ${sort}`;
+                orderBy = ` ORDER BY '${String(obj.orderBy)}' ${sort}`;
             }
         }
-        connection.query(`SELECT ${query} FROM ${table}${condition}${orderBy}`, function(err, rows, fields) {
+        str = `SELECT ${query} FROM ${table}${condition}${orderBy}`;
+        connection.query(str, function(err, rows, fields) {
             that.startNum += 1;
             err ? that.result.push(err) : that.result.push(rows);
             resolve();
