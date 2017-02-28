@@ -36,7 +36,7 @@ module.exports = {
             }
             if (isStringOrArray(obj.orderBy)) {
                 sort = (obj.sort == 'ASC' || obj.sort == 'DESC') ? obj.sort : 'ASC';
-                orderBy = ` ORDER BY '${String(obj.orderBy)}' ${sort}`;
+                orderBy = ` ORDER BY ${String(obj.orderBy)} ${sort}`;
             }
         }
         str = `SELECT ${query} FROM ${table}${condition}${orderBy}`;
