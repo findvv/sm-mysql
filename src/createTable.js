@@ -34,7 +34,7 @@ module.exports = {
             })();
 
         // CREATE TABLE `test`.`something` ( `uid` INT(10) NOT NULL ) ENGINE = InnoDB
-        connection.query(`CREATE TABLE test.${table} (${str})`, function(err, rows, fields) {
+        connection.query(`CREATE TABLE ${table} (${str})`, function(err, rows, fields) {
             that.startNum += 1;
             err ? that.result.push(err) : that.result.push(rows);
             resolve();
