@@ -1,5 +1,4 @@
 'use strict';
-var db = require('./src/config.js');
 var all = require('./src/all.js');
 var mysql   = require('mysql');
 var co = require('co');
@@ -8,7 +7,7 @@ function SMysql(config) {
     this.result = [];
     this.steps = [];
     this.startNum = 0;
-    this.connection = mysql.createConnection(db); 
+    this.connection = mysql.createConnection(config); 
     this.connection.connect();
 }
 SMysql.prototype = all;
