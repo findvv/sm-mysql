@@ -28,4 +28,35 @@ SMysql.prototype.end = function(func) {
         that.connection.end();
     })
 }
+SMysql.copyTable = function(table,sql1,sql2,callback){
+    var sMysql1 = new SMysql(sql1);
+    var sMysql2 = new SMysql(sql2);
+    var result = '';
+
+    function step1() {
+        return new Promise(function(resolve, reject) {
+            sMysql1
+                .exportTable(table)
+                .end(function(data){
+                    resolve(data[0]);
+                });
+        });
+    }
+    function step2(data) {
+        return new Promise(function(resolve, reject) {
+            sMysql2
+                .importTable(table,data)
+                .end(function(data){
+                    resolve('导出完成');
+                });
+        });
+    }
+    function *steps() {
+        var data = yield step1();
+        result = yield step2(data);
+    }
+    co(steps).then(function(data){
+        callback && callback.call(null, result);
+    });
+}
 module.exports = SMysql;

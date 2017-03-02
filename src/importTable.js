@@ -30,7 +30,6 @@ module.exports = {
         function step(query) {
             return new Promise(function(resolve, reject) {
                 connection.query(query, function(err, rows, fields){
-                    console.log(err, rows);
                     resolve();
                 });
             });
