@@ -1,17 +1,14 @@
 {
   "name": "sm-mysql",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "node test.js"
-  },
+  "scripts": {},
   "author": "github.com/findvv",
   "license": "ISC",
   "dependencies": {
     "co": "^4.6.0",
     "extend": "^3.0.0",
-    "mysql": "^2.13.0",
-    "xlsx": "^0.8.6"
+    "mysql": "^2.13.0"
   }
 }
