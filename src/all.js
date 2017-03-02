@@ -9,4 +9,5 @@ var deleteTable = require('./deleteTable.js');
 var createSql = require('./createSql.js');
 var deleteSql = require('./deleteSql.js');
 var copyTable = require('./copyTable.js');
-module.exports = extend(search,add,deleteData,update,deleteTable,createTable,createSql,deleteSql,copyTable);
+var exportTable = require('./exportTable.js');
+module.exports = extend(search,add,deleteData,update,deleteTable,createTable,createSql,deleteSql,copyTable,exportTable);
