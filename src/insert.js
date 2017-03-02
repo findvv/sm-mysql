@@ -1,10 +1,10 @@
 'use strict';
 /** @examples
-1. sMysql.add('table',{'name': 'test','password': '123456'}) ==> 向table表中增加key->name/value->test，key->password/value->123456的数据
-2. sMysql.add('table',[{'name': 'test1','password': '12'},{'name': 'test2','password': '123'}])
+1. sMysql.insert('table',{'name': 'test','password': '123456'}) ==> 向table表中增加key->name/value->test，key->password/value->123456的数据
+2. sMysql.insert('table',[{'name': 'test1','password': '12'},{'name': 'test2','password': '123'}])
 */
 module.exports = {
-    addHandler : function(args, resolve){
+    insertHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
             obj = args[1],
@@ -43,9 +43,9 @@ module.exports = {
             resolve();
         });
     },
-    add : function(index, key){        
+    insert : function(index, key){        
         this.steps.push({
-            name: 'addHandler',
+            name: 'insertHandler',
             args: arguments
         });
         return this;
