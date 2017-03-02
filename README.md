@@ -18,6 +18,7 @@ npm install sm-mysql --save
 * 删除数据库
 * 新增数据表
 * 删除数据表
+* 复制数据表
 * 插入新数据
 * 更新数据
 * 删除数据
@@ -37,9 +38,12 @@ var db = {
 };
 var sMysql = new SMysql(db);
 sMysql
-    .createSql('test8')
-    .end(function(data){
-        console.log(data[0]);
+    .createSql('db')
+    .createTable('table')
+    .insert('table',[{'name': 'test1','password': '12'},{'name': 'test2','password': '123'}])
+    .search()
+    .end(function(data){  // data为各个步骤的返回结果
+        console.log(data);
     });
 
 ```
