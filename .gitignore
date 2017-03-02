@@ -1,4 +1,2 @@
 node_modules/
-src/config.js
-
-src/config2.js
+dbs/
