@@ -2,12 +2,14 @@
 var all = require('./all.js');
 var mysql   = require('mysql');
 var co = require('co');
-function SMysql(config) {
+var extend = require('extend');
+function SMysql(config, db) {
+    var obj = db ? extend(config,{'database':db}) : config;
     this.config = config;
     this.result = [];
     this.steps = [];
     this.startNum = 0;
-    this.connection = mysql.createConnection(config); 
+    this.connection = mysql.createConnection(obj); 
     this.connection.connect();
 }
 SMysql.prototype = all;
