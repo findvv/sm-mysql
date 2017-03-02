@@ -46,6 +46,7 @@ sMysql
         console.log(data);
     });
 
+SMysql.copyTable('aqi', db1, db2);  //  将数据库db1中的aqi表复制到数据库db2中
 ```
 # License
 
