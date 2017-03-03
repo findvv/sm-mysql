@@ -10,11 +10,10 @@ module.exports = {
     orderHandler : function(args, resolve){
         var that = this,
             connection = that.connection,
-            key = String(args[0]),
-            table = that.config.table,
-            query = args[1] ? (' WHERE ' + util.where(args[1])) : '';
+            table = args[0],
+            key = args[1];
 
-        connection.query(`SELECT ${key} FROM ${table}${query}`, function(err, rows, fields) {
+        connection.query(`SELECT * FROM ${table} ORDER BY ${key} DESC`, function(err, rows, fields) {
             that.startNum += 1;
             if (err) {
                 that.result.push(err);
@@ -27,7 +26,7 @@ module.exports = {
     },
     order : function(index, key){        
         this.steps.push({
-            name: 'searchHandler',
+            name: 'orderHandler',
             args: arguments
         });
         return this;

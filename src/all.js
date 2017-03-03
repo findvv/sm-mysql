@@ -11,4 +11,5 @@ var deleteSql = require('./deleteSql.js');
 var copyTable = require('./copyTable.js');
 var exportTable = require('./exportTable.js');
 var importTable = require('./importTable.js');
-module.exports = extend(search,insert,deleteData,update,deleteTable,createTable,createSql,deleteSql,copyTable,exportTable,importTable);
+var order = require('./order.js');
+module.exports = extend(search,insert,deleteData,update,deleteTable,createTable,createSql,deleteSql,copyTable,exportTable,importTable,order);
