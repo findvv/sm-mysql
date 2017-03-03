@@ -1,18 +1,23 @@
 var SMysql = require('../index.js')
 var db = require('../dbs/db2.js');
-var sMysql = new SMysql(db,'weather');
-sMysql.createTable('aqi',{
-    'time' : {
+var sMysql = new SMysql(db,'movie');
+sMysql.createTable('douban',{
+    'title' : {
         type: 'VARCHAR',
-        length: 20,
+        length: 30,
         isNull: false
     },
-    'beijing' : {
+    'rate' : {
         type: 'VARCHAR',
         length: 10,
         isNull: false
     },
-    'hangzhou' : {
+    'img' : {
+        type: 'VARCHAR',
+        length: 100,
+        isNull: false
+    },
+    'id' : {
         type: 'VARCHAR',
         length: 10,
         isNull: false

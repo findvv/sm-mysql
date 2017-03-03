@@ -31,7 +31,7 @@ module.exports = {
             for(var v of obj) {
                 arr3 = [];
                 for(var i in v) {
-                    arr3.push("'" + v[i] + '"');
+                    arr3.push('"' + v[i] + '"');
                 }
                 arr2.push('(' + String(arr3) + ')');
             }

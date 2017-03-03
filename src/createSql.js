@@ -10,7 +10,7 @@ module.exports = {
 
         connection.query(`CREATE DATABASE ${sql}`, function(err, rows, fields) {
             that.startNum += 1;
-            err ? that.result.push(err) : that.result.push(rows);
+            err ? that.result.push(err) : that.result.push(`创建数据库${sql}成功`);
             resolve();
         });
     },

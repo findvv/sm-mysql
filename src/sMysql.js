@@ -60,4 +60,9 @@ SMysql.copyTable = function(table,sql1,sql2,callback){
         callback && callback();
     });
 }
+SMysql.sort = function(order, sortBy) {
+  var ordAlpah = (order == 'asc') ? '>' : '<';
+  var sortFun = new Function('a', 'b', 'return Number(a.' + sortBy + ')' + ordAlpah + 'Number(b.' + sortBy + ')?1:-1');
+  return sortFun;
+}
 module.exports = SMysql;
