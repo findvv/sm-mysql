@@ -11,9 +11,10 @@ module.exports = {
         var that = this,
             connection = that.connection,
             table = args[0],
-            key = args[1];
+            key = args[1],
+            type = args[2];
 
-        connection.query(`SELECT * FROM ${table} ORDER BY ${key} DESC`, function(err, rows, fields) {
+        connection.query(`SELECT * FROM ${table} ORDER BY ${key} ${type}`, function(err, rows, fields) {
             that.startNum += 1;
             if (err) {
                 that.result.push(err);
