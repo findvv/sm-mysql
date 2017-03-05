@@ -22,6 +22,7 @@ module.exports = {
                         that.result.push(err);
                         resolve();
                     } else {
+                        that.result.push(`成功复制${table1}`)
                         resolve(rows);
                     }
                 });

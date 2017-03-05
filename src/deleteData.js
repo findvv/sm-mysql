@@ -24,7 +24,7 @@ module.exports = {
         }        
         connection.query(newStr, function(err, rows, fields){
             that.startNum += 1;
-            err ? that.result.push(err.code) : that.result.push(rows);
+            err ? that.result.push(err.code) : that.result.push(`成功清空${table}中的数据`);
             resolve();
         });
     },
