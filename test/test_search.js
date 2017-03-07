@@ -1,6 +1,6 @@
 var SMysql = require('../index.js')
-var db = require('../dbs/db2.js');
-var sMysql = new SMysql(db,'weather');
-sMysql.search('aqi').end(function(data) {
+var db = require('../dbs/db1.js');
+var sMysql = new SMysql(db,'music');
+sMysql.search('wangyi').end(function(data) {
     console.log(data[0]);
 });
