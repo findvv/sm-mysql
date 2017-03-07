@@ -11,11 +11,13 @@ module.exports = {
         var that = this,
             connection = that.connection,
             table = args[0],
-            content = args[1]
+            content = args[1],
             key = args[2],
-            type = args[3];
+            type = args[3],
+            len = args[4],
+            lenStr = len ? `LIMIT ${len}` : '';
 
-        connection.query(`SELECT ${content} FROM ${table} ORDER BY ${key} ${type}`, function(err, rows, fields) {
+        connection.query(`SELECT ${content} FROM ${table} ORDER BY ${key} ${type} ${lenStr}`, function(err, rows, fields) {
             that.startNum += 1;
             if (err) {
                 that.result.push(err);
