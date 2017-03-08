@@ -6,7 +6,8 @@
         query: '*',                     // 搜索关键词
         condition: {'name':'1'},        // 搜索条件
         orderBy:['name','password'],    // 排序条件
-        sort: 'ASC'                     // ASC升序或DESC降序
+        sort: 'ASC',                     // ASC升序或DESC降序
+        limit: '0,100'
    })
 */
 var util = require('./util.js');
@@ -23,7 +24,7 @@ module.exports = {
             connection = that.connection,
             table = args[0],
             obj = args[1],
-            query = '*', condition = '',orderBy = '',sort = '',str = '';
+            query = '*', condition = '',orderBy = '',sort = '',str = '',limit = '';
 
         if (isStringOrArray(obj)) {
             query = String(obj);
@@ -38,8 +39,11 @@ module.exports = {
                 sort = (obj.sort == 'ASC' || obj.sort == 'DESC') ? obj.sort : 'ASC';
                 orderBy = ` ORDER BY ${String(obj.orderBy)} ${sort}`;
             }
+            if (isStringOrArray(obj.limit)) {
+                limit = ` LIMIT ${obj.limit}`;
+            }
         }
-        str = `SELECT ${query} FROM ${table}${condition}${orderBy}`;
+        str = `SELECT ${query} FROM ${table}${condition}${orderBy}${limit}`;
         connection.query(str, function(err, rows, fields) {
             that.startNum += 1;
             err ? that.result.push(err) : that.result.push(rows);

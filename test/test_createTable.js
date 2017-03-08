@@ -1,7 +1,7 @@
 var SMysql = require('../index.js')
-var db = require('../dbs/db1.js');
+var db = require('../dbs/db2.js');
 var sMysql = new SMysql(db,'feiji');
-sMysql.createTable('qunaer2',{
+sMysql.createTable('jipiao',{
     'price' : {
         type: 'INT',
         length: 10,
@@ -12,14 +12,19 @@ sMysql.createTable('qunaer2',{
         length: 10,
         isNull: false
     },
-    'airCode' : {
+    'gotime' : {
         type: 'VARCHAR',
-        length: 10,
+        length: 50,
         isNull: false
     },
-    'time' : {
+    'backtime' : {
         type: 'VARCHAR',
-        length: 20,
+        length: 50,
+        isNull: false
+    },
+    'url' : {
+        type: 'VARCHAR',
+        length: 300,
         isNull: false
     }
 }).end(function(data) {
