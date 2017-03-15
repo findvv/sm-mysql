@@ -32,22 +32,18 @@ var db = {
   host     : 'localhost',  
   user     : 'root',  
   password : 'password',  
-  database : 'test',
   port     : '3724',
-  table    : 'test'
 };
-var sMysql = new SMysql(db);
+var sMysql = new SMysql(db,'sql');
 sMysql
-    .createSql('db')
     .createTable('table')
     .insert('table',[{'name': 'test1','password': '12'},{'name': 'test2','password': '123'}])
-    .search()
+    .search('table')
     .end(function(data){  // data为各个步骤的返回结果
         console.log(data);
     });
-
-SMysql.copyTable('aqi', db1, db2);  //  将数据库db1中的aqi表复制到数据库db2中
 ```
+具体请看test文件夹里的测试用例
 # License
 
 MIT Licensed. Copyright (c) Zhaoxiang Zhang 2017.
