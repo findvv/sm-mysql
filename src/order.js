@@ -15,7 +15,7 @@ module.exports = {
             key = args[2],
             type = args[3],
             len = args[4],
-            lenStr = len ? `LIMIT ${len}` : '';
+            lenStr = len ? `LIMIT ${len}` : 'LIMIT';
 
         connection.query(`SELECT ${content} FROM ${table} ORDER BY ${key} ${type} ${lenStr}`, function(err, rows, fields) {
             that.startNum += 1;
