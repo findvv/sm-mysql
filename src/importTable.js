@@ -30,6 +30,9 @@ module.exports = {
         function step(query) {
             return new Promise(function(resolve, reject) {
                 connection.query(query, function(err, rows, fields){
+                    if (err) {
+                        console.log(err);
+                    }
                     resolve();
                 });
             });
