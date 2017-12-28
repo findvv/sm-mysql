@@ -10,7 +10,8 @@
         limit: '0,100'
    })
 */
-var util = require('./util.js');
+let util = require('./util.js');
+
 function isObject(obj) {
     return Object.prototype.toString.call(obj) == '[object Object]';
 }
@@ -18,7 +19,7 @@ function isStringOrArray(obj) {
     return obj && (typeof obj == 'string' || Object.prototype.toString.call(obj) == '[object Array]');
 }
 function searchHandler(args, resolve) {
-    var connection = this.connection,
+    let connection = this.connection,
         table = args[0],
         obj = args[1],
         query = '*', condition = '',orderBy = '',sort = '',str = '',limit = '';
