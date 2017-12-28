@@ -3,23 +3,21 @@
 删除数据库
 1.  sMysql.deleteSql('test8');
 */
-module.exports = {
-    deleteSqlHandler : function(args, resolve){
-        var that = this,
-            connection = that.connection,
-            sql = args[0];
+function deleteSqlHandler(args, resolve){
+    var connection = this.connection,
+        sql = args[0];
 
-        connection.query(`DROP DATABASE ${sql}`, function(err, rows, fields) {
-            that.startNum += 1;
-            err ? that.result.push(err.code) : that.result.push(rows);
-            resolve();
-        });
-    },
-    deleteSql : function(index, key){     
+    connection.query(`DROP DATABASE ${sql}`, (err, rows, fields)=>{
+        err ? this.result.push(err.code) : this.result.push(`成功删除数据库：${sql}`);
+        resolve();
+    });
+}
+module.exports = {
+    deleteSql(){     
         this.steps.push({
-            name: 'deleteSqlHandler',
+            func: deleteSqlHandler,
             args: arguments
-        });
+        });   
         return this;
     }
 }

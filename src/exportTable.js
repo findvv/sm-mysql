@@ -1,11 +1,8 @@
 'use strict';
 /** @examples
 */
-var co = require('co');
-module.exports = {
-    exportTableHandler : function(args, resolve){
-        var that = this,
-            connection = that.connection,
+function exportTableHandler(args, resolve){
+        var connection = this.connection,
             table = args[0],
             result = {};
 
@@ -23,23 +20,23 @@ module.exports = {
                 });
             });
         }
-        function *steps() {
-            var case1 = yield step1();
-            var case2 = yield step2();
+        async function steps() {
+            let case1 = await step1();
+            let case2 = await step2();
             result['query'] = case1;
             result['data'] = case2;
         }
-        co(steps).then(function(){
-            that.startNum += 1;
-            that.result.push(result);
+        steps().then(()=>{
+            this.result.push(result);
             resolve();
         });
-    },
-    exportTable : function(index, key){        
+    }
+module.exports = {
+    exportTable(){     
         this.steps.push({
-            name: 'exportTableHandler',
+            func: exportTableHandler,
             args: arguments
-        });
+        });   
         return this;
     }
 }

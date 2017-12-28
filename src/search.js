@@ -17,44 +17,41 @@ function isObject(obj) {
 function isStringOrArray(obj) {
     return obj && (typeof obj == 'string' || Object.prototype.toString.call(obj) == '[object Array]');
 }
+function searchHandler(args, resolve) {
+    var connection = this.connection,
+        table = args[0],
+        obj = args[1],
+        query = '*', condition = '',orderBy = '',sort = '',str = '',limit = '';
 
-module.exports = {
-    searchHandler : function(args, resolve){
-        var that = this,
-            connection = that.connection,
-            table = args[0],
-            obj = args[1],
-            query = '*', condition = '',orderBy = '',sort = '',str = '',limit = '';
-
-        if (isStringOrArray(obj)) {
-            query = String(obj);
-        } else if (isObject(obj)) {
-            if (isStringOrArray(obj.query)) {
-                query = String(obj.query);
-            }
-            if (isStringOrArray(obj.condition)) {
-                condition = ` WHERE ${util.where(obj.condition)}`;
-            }
-            if (isStringOrArray(obj.orderBy)) {
-                sort = (obj.sort == 'ASC' || obj.sort == 'DESC') ? obj.sort : 'ASC';
-                orderBy = ` ORDER BY ${String(obj.orderBy)} ${sort}`;
-            }
-            if (isStringOrArray(obj.limit)) {
-                limit = ` LIMIT ${obj.limit}`;
-            }
+    if (isStringOrArray(obj)) {
+        query = String(obj);
+    } else if (isObject(obj)) {
+        if (isStringOrArray(obj.query)) {
+            query = String(obj.query);
         }
-        str = `SELECT ${query} FROM ${table}${condition}${orderBy}${limit}`;
-        connection.query(str, function(err, rows, fields) {
-            that.startNum += 1;
-            err ? that.result.push(err) : that.result.push(rows);
-            resolve();
-        });
-    },
-    search : function(index, key){        
+        if (isObject(obj.condition)) {
+            condition = ` WHERE ${util.where(obj.condition)}`;
+        }
+        if (isStringOrArray(obj.orderBy)) {
+            sort = (obj.sort == 'ASC' || obj.sort == 'DESC') ? obj.sort : 'ASC';
+            orderBy = ` ORDER BY ${String(obj.orderBy)} ${sort}`;
+        }
+        if (isStringOrArray(obj.limit)) {
+            limit = ` LIMIT ${obj.limit}`;
+        }
+    }
+    str = `SELECT ${query} FROM ${table}${condition}${orderBy}${limit}`;
+    connection.query(str, (err, rows, fields)=>{
+        err ? this.result.push(err) : this.result.push(rows);
+        resolve();
+    });
+}
+module.exports = {
+    search(){     
         this.steps.push({
-            name: 'searchHandler',
+            func: searchHandler,
             args: arguments
-        });
+        });   
         return this;
     }
 }

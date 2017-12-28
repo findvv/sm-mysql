@@ -7,13 +7,13 @@ var obj = {
         for(var i = 0; i < keys.length; i++) {
             var key = keys[i],
                 value = obj[keys[i]],
-                equl = '=';
+                equl = '=',
                 sum = key + equl + '"' + value + '"';
 
             if (i == 0) {
                 str += sum;
             } else {
-                str += ' AND ' + sum;
+                str += ' , ' + sum;
             }
         }
         return str;
@@ -25,7 +25,7 @@ var obj = {
         for(var i = 0; i < keys.length; i++) {
             var key = keys[i],
                 value = obj[keys[i]],
-                equl = (value.indexOf('%') != -1 || type == 'LIKE') ? ' LIKE ' : (type == 'REGEXP' ? ' REGEXP ' : '=');
+                equl = (value.indexOf('%') != -1 || type == 'LIKE') ? ' LIKE ' : (type == 'REGEXP' ? ' REGEXP ' : '='),
                 sum = key + equl + '"' + value + '"';
 
             if (i == 0) {

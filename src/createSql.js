@@ -2,23 +2,21 @@
 /** @examples
 1.  sMysql.createSql('test7');
 */
-module.exports = {
-    createSqlHandler : function(args, resolve){
-        var that = this,
-            connection = that.connection,
-            sql = args[0];
+function createSqlHandler(args, resolve){
+    var connection = this.connection,
+        sql = args[0];
 
-        connection.query(`CREATE DATABASE ${sql}`, function(err, rows, fields) {
-            that.startNum += 1;
-            err ? that.result.push(err) : that.result.push(`创建数据库${sql}成功`);
-            resolve();
-        });
-    },
-    createSql : function(index, key){     
+    connection.query(`CREATE DATABASE ${sql}`, (err, rows, fields)=>{
+        err ? this.result.push(err) : this.result.push(`创建数据库${sql}成功`);
+        resolve();
+    });
+}
+module.exports = {
+    createSql(){     
         this.steps.push({
-            name: 'createSqlHandler',
+            func: createSqlHandler,
             args: arguments
-        });
+        });   
         return this;
     }
 }

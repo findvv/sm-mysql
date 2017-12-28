@@ -15,35 +15,33 @@
         }
     });
 */
+function createTableHandler(args, resolve){
+    var connection = this.connection,
+        table = args[0],
+        data = args[1],
+        str = (function(){
+            var arr = [];
+
+            for(var key in data) {
+                var isNull = data[key].isNull ? 'NULL' : 'NOT NULL',
+                    defaultStr = data[key].default ? `DEFAULT '${data[key].default}'` : '';
+
+                arr.push(`${key} ${data[key].type}(${data[key].length}) ${isNull} ${defaultStr}`);
+            }
+            return String(arr);
+        })();
+
+    connection.query(`CREATE TABLE ${table} (${str}) CHARSET=utf8`, (err, rows, fields)=>{
+        err ? this.result.push(err) : this.result.push(`创建数据表${table}成功`);
+        resolve();
+    });
+}
 module.exports = {
-    createTableHandler : function(args, resolve){
-        var that = this,
-            connection = that.connection,
-            table = args[0],
-            data = args[1],
-            str = (function(){
-                var arr = [];
-
-                for(var key in data) {
-                    var isNull = data[key].isNull ? 'NULL' : 'NOT NULL',
-                        defaultStr = data[key].default ? `DEFAULT '${data[key].default}'` : '';
-
-                    arr.push(`${key} ${data[key].type}(${data[key].length}) ${isNull} ${defaultStr}`);
-                }
-                return String(arr);
-            })();
-
-        connection.query(`CREATE TABLE ${table} (${str}) CHARSET=utf8`, function(err, rows, fields) {
-            that.startNum += 1;
-            err ? that.result.push(err) : that.result.push(`创建数据表${table}成功`);
-            resolve();
-        });
-    },
-    createTable : function(index, key){     
+    createTable(){     
         this.steps.push({
-            name: 'createTableHandler',
+            func: createTableHandler,
             args: arguments
-        });
+        });   
         return this;
     }
 }

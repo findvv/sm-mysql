@@ -7,10 +7,8 @@
 })
 */
 var util = require('./util.js');
-module.exports = {
-    deleteDataHandler : function(args, resolve){
-        var that = this,
-            connection = that.connection,
+function deleteDataHandler(args, resolve) {
+        var connection = this.connection,
             obj = args[1], 
             table = args[0],
             str = '',
@@ -22,17 +20,17 @@ module.exports = {
             str = util.where(obj);
             newStr = `DELETE FROM ${table} WHERE ${str}`;
         }        
-        connection.query(newStr, function(err, rows, fields){
-            that.startNum += 1;
-            err ? that.result.push(err.code) : that.result.push(`成功清空${table}中的数据`);
+        connection.query(newStr, (err, rows, fields)=>{
+            err ? this.result.push(err.code) : this.result.push(`成功删除${table}数据`);
             resolve();
         });
-    },
-    deleteData : function(index, key){        
+    }
+module.exports = {
+    deleteData(){     
         this.steps.push({
-            name: 'deleteDataHandler',
+            func: deleteDataHandler,
             args: arguments
-        });
+        });   
         return this;
     }
 }

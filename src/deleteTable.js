@@ -3,23 +3,21 @@
 1. sMysql.deleteTable(['movie1','movie2','movie3','movie4','movie5']) ==> 删除数据表
 2. sMysql.deleteTable('movie1');
 */
-module.exports = {
-    delTableHandler : function(args, resolve){
-        var that = this,
-            connection = that.connection,
-            table = String(Array.from(args));
+function delTableHandler(args, resolve){
+    var connection = this.connection,
+        table = String(Array.from(args));
 
-        connection.query(`DROP TABLE ${table}`, function(err, rows, fields){
-            that.startNum += 1;
-            err ? that.result.push(err.code) : that.result.push(rows);
-            resolve();
-        });
-    },
-    deleteTable : function(index, key){        
+    connection.query(`DROP TABLE ${table}`, (err, rows, fields)=>{
+        err ? this.result.push(err.code) : this.result.push(`成功删除数据表：${table}`);
+        resolve();
+    });
+}
+module.exports = {
+    deleteTable(){     
         this.steps.push({
-            name: 'delTableHandler',
+            func: delTableHandler,
             args: arguments
-        });
+        });   
         return this;
     }
 }
