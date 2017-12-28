@@ -3,7 +3,7 @@
 1.  sMysql.createSql('test7');
 */
 function createSqlHandler(args, resolve){
-    var connection = this.connection,
+    let connection = this.connection,
         sql = args[0];
 
     connection.query(`CREATE DATABASE ${sql}`, (err, rows, fields)=>{
